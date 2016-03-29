@@ -12,7 +12,7 @@
   },
   "autoload-dev": {
     "classmap": [ "src/" ],
-    "files": [ "src/wp_setup_autoloader.php" ]
+    "files": [ "src/functions.php" ]
   },
   "minimum-stability": "dev",
   "config": {
