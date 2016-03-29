@@ -1,5 +1,8 @@
 <?php # -*- coding: utf-8 -*-
 
+/**
+ * Core WordPress autoloader that can be used for spl_autoload_register().
+ */
 class WP_Autoload_SplAutoload implements WP_Autoload_Autoload {
 
 	/**
@@ -8,24 +11,38 @@ class WP_Autoload_SplAutoload implements WP_Autoload_Autoload {
 	private $rules = array();
 
 	/**
-	 * @param WP_Autoload_Rule $autoload_rule
+	 * Adds the given autoload rule to the autoloader.
 	 *
-	 * @return void
+	 * @param WP_Autoload_Rule $rule The autoload rule object.
+	 *
+	 * @return bool
 	 */
-	public function add_rule( $autoload_rule ) {
+	public function add_rule( WP_Autoload_Rule $rule ) {
 
-		if ( ! in_array( $autoload_rule, $this->rules, TRUE ) )
-			$this->rules[] = $autoload_rule;
+		if ( in_array( $rule, $this->rules, true ) ) {
+			return false;
+		}
+
+		$this->rules[] = $rule;
+
+		return true;
 	}
 
 	/**
-	 * @param string $fqcn (full qualified class name)
+	 * Loads the according file for the given fully qualified name of a class, interface or trait.
+	 *
+	 * @param string $fqn The fully qualified name of a class, interface or trait.
+	 *
+	 * @return bool
 	 */
-	public function load_class( $fqcn ) {
+	public function load_file( $fqn ) {
 
 		foreach ( $this->rules as $rule ) {
-			if ( $rule->load_class( $fqcn ) )
-				break;
+			if ( $rule->load_file( $fqn ) ) {
+				return true;
+			}
 		}
+
+		return false;
 	}
 }

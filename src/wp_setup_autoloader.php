@@ -1,18 +1,22 @@
 <?php # -*- coding: utf-8 -*-
 
 /**
- * Triggers the action 'wp_autoload'
+ * Registers the autoloader.
+ *
+ * @see WP_Autoload_Controller::register_autoloader
+ *
+ * @return bool
  */
-function wp_setup_autoloader() {
+function wp_register_autoloader() {
 
-	$autoloader = new WP_Autoload_SplAutoload;
-	spl_autoload_register( array( $autoloader, 'load_class' ) );
+	if ( did_action( WP_Autoload_Controller::ACTION ) ) {
+		// TODO: Adapt WordPress version.
+		_doing_it_wrong( __FUNCTION__, __( 'The autoloader has already been registered.' ), '4.6.0' );
 
-	/**
-	 * Use the WordPress core autoloader to
-	 * bootstrap your plugin and theme
-	 *
-	 * @param WP_Autoload_Autoload $autoloader
-	 */
-	do_action( 'wp_autoload', $autoloader );
+		return false;
+	}
+
+	$controller = new WP_Autoload_Controller();
+
+	return $controller->register_autoloader();
 }

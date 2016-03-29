@@ -1,11 +1,16 @@
 <?php # -*- coding: utf-8 -*-
 
-interface WP_Autoload_Autoload {
+/**
+ * Interface for all core WordPress-compatible autoloader implementations.
+ */
+interface WP_Autoload_Autoload extends WP_Autoload_Rule {
 
 	/**
-	 * @param WP_Autoload_Rule $autoload_rule
+	 * Adds the given autoload rule to the autoloader.
 	 *
-	 * @return void
+	 * @param WP_Autoload_Rule $rule The autoload rule object.
+	 *
+	 * @return bool
 	 */
-	public function add_rule( $autoload_rule );
+	public function add_rule( WP_Autoload_Rule $rule );
 }
