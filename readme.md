@@ -15,8 +15,8 @@ Current Status: **very early draft**
  
  * must support PHP 5.2 even without SPL enabled
  * should be object orientated following SOLID principles
- * completely unit tested (tests are made in isolation)
- * completely documented
+ * should be completely unit tested (tests are made in isolation)
+ * should be completely documented
 
 The current development requirements are set to 5.4. Tests will be made backward compatible later.
 
