@@ -14,6 +14,7 @@ Current Status: **very early draft**
  The implementation:
  
  * must support PHP 5.2 even without SPL enabled
+ * should deal with [case-insensitivity](https://r.je/php-autoloaders-should-not-be-case-sensitive.html)
  * should be object orientated following SOLID principles
  * should be completely unit tested (tests are made in isolation)
  * should be completely documented
