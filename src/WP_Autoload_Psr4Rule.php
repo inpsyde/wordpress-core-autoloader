@@ -30,6 +30,8 @@ class WP_Autoload_Psr4Rule implements WP_Autoload_Rule {
 	public function __construct( $namespace, $directory, WP_Autoload_FileLoader $file_loader ) {
 
 		$this->namespace = trim( (string) $namespace, '\\' );
+		// append trailing ns separator to avoid matches of NS:Foo\Bar with FQN:Foo\BarBazz
+		$this->namespace .= '\\';
 
 		$this->directory = preg_replace( '~[\\|/]+~', DIRECTORY_SEPARATOR, (string) $directory );
 		$this->directory = rtrim( $this->directory, DIRECTORY_SEPARATOR );
