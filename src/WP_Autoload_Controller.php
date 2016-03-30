@@ -1,7 +1,7 @@
 <?php # -*- coding: utf-8 -*-
 
 /**
- * Core WordPress autoload file loader that checks for readability only.
+ * WordPress autoload controller that registers the autoloader.
  */
 class WP_Autoload_Controller {
 
@@ -26,18 +26,27 @@ class WP_Autoload_Controller {
 			return false;
 		}
 
-		$this->autoloader = new WP_Autoload_SplAutoload();
+		/**
+		 * Filters the autoloader object.
+		 *
+		 * @param WP_Autoload_Autoload $autoloader The autoloader object.
+		 */
+		$custom_autoloader = apply_filters( 'wp_custom_autoloader', null );
+
+		$this->autoloader = $custom_autoloader instanceof WP_Autoload_Autoload
+			? $custom_autoloader
+			: new WP_Autoload_SplAutoload();
 
 		add_filter( 'wp_autoloader', array( $this, 'get_autoloader' ) );
 
-		if ( ! spl_autoload_register( array( $this->autoloader, 'load_file' ) ) ) {
+		if ( ! $this->autoloader->register() ) {
 			return false;
 		}
 
 		/**
 		 * Fires right after the autoloader has been registered.
 		 *
-		 * @param WP_Autoload_Autoload $autoloader The autolodaer object.
+		 * @param WP_Autoload_Autoload $autoloader The autoloader object.
 		 */
 		do_action( self::ACTION, $this->autoloader );
 

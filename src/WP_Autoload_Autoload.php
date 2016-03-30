@@ -13,4 +13,11 @@ interface WP_Autoload_Autoload extends WP_Autoload_Rule {
 	 * @return bool
 	 */
 	public function add_rule( WP_Autoload_Rule $rule );
+
+	/**
+	 * Registers the autoloader.
+	 *
+	 * @return bool
+	 */
+	public function register();
 }

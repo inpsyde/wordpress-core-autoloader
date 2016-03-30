@@ -29,6 +29,20 @@ class WP_Autoload_SplAutoload implements WP_Autoload_Autoload {
 	}
 
 	/**
+	 * Registers the autoloader.
+	 *
+	 * @return bool
+	 */
+	public function register() {
+
+		if ( ! function_exists( 'spl_autoload_register' ) ) {
+			return false;
+		}
+
+		return spl_autoload_register( array( $this, 'load_file' ) );
+	}
+
+	/**
 	 * Loads the according file for the given fully qualified name of a class, interface or trait.
 	 *
 	 * @param string $fqn The fully qualified name of a class, interface or trait.
