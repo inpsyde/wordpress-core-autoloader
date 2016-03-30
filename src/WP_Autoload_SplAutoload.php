@@ -39,7 +39,7 @@ class WP_Autoload_SplAutoload implements WP_Autoload_Autoload {
 			return false;
 		}
 
-		return spl_autoload_register( array( $this, 'load_file' ) );
+		return spl_autoload_register( array( $this, 'load' ) );
 	}
 
 	/**
@@ -49,10 +49,10 @@ class WP_Autoload_SplAutoload implements WP_Autoload_Autoload {
 	 *
 	 * @return bool
 	 */
-	public function load_file( $fqn ) {
+	public function load( $fqn ) {
 
 		foreach ( $this->rules as $rule ) {
-			if ( $rule->load_file( $fqn ) ) {
+			if ( $rule->load( $fqn ) ) {
 				return true;
 			}
 		}

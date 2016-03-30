@@ -12,5 +12,5 @@ interface WP_Autoload_Rule {
 	 *
 	 * @return bool
 	 */
-	public function load_file( $fqn );
+	public function load( $fqn );
 }

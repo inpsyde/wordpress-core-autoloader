@@ -44,7 +44,7 @@ class WP_Autoload_Psr4Rule implements WP_Autoload_Rule {
 	 *
 	 * @return bool
 	 */
-	public function load_file( $fqn ) {
+	public function load( $fqn ) {
 
 		$fqn = ltrim( $fqn, '\\' );
 		if ( 0 !== strpos( $fqn, $this->namespace ) ) {
