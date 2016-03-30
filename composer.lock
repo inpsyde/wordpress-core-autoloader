@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bec0e06d3cc16cb6f9455dbef9d8174b",
-    "content-hash": "cefba31fd6cfe2f4d99e056444db0586",
+    "hash": "2afdcb4e5f73eb6452dfa3907bc70c4e",
+    "content-hash": "221ae3a3fdbc2f8335eb958d53a2d487",
     "packages": [],
     "packages-dev": [
         {
@@ -256,6 +256,91 @@
             ],
             "description": "Composition package of brain/monkey and mockery/mockery with a custom test case",
             "time": "2016-03-29 07:20:28"
+        },
+        {
+            "name": "inpsyde/wordpress-dev",
+            "version": "4.4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inpsyde/wordpress-dev.git",
+                "reference": "3522988717a41791788dc9cf7e8439add8a28f31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inpsyde/wordpress-dev/zipball/3522988717a41791788dc9cf7e8439add8a28f31",
+                "reference": "3522988717a41791788dc9cf7e8439add8a28f31",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "wordpress-core",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "WordPress Community",
+                    "homepage": "http://wordpress.org/about/"
+                }
+            ],
+            "description": "WordPress is web software you can use to create a beautiful website or blog.",
+            "homepage": "http://wordpress.org/",
+            "keywords": [
+                "blog",
+                "cms",
+                "wordpress"
+            ],
+            "time": "2016-03-30 20:01:44"
+        },
+        {
+            "name": "inpsyde/wp-tests-starter",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inpsyde/WP-Tests-Starter.git",
+                "reference": "c585234a96109dbb7708bd34abfd64542bb07f01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inpsyde/WP-Tests-Starter/zipball/c585234a96109dbb7708bd34abfd64542bb07f01",
+                "reference": "c585234a96109dbb7708bd34abfd64542bb07f01",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "inpsyde/wordpress-dev": "dev-master"
+            },
+            "suggest": {
+                "inpsyde/wordpress-dev": "WordPress development composer package."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WpTestsStarter\\": "src/WpTestsStarter"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Naber",
+                    "email": "d.naber@inpsyde.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A package that helps you setting up WordPress integration test environments quickly.",
+            "keywords": [
+                "integration tests",
+                "tests",
+                "wordpress"
+            ],
+            "time": "2016-01-27 23:05:52"
         },
         {
             "name": "mockery/mockery",
@@ -1179,12 +1264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb"
+                "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/584e52cb8f788a887553ba82db6caacb1d6260bb",
-                "reference": "584e52cb8f788a887553ba82db6caacb1d6260bb",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
+                "reference": "e4fbcc65f90909c999ac3b4dfa699ee6563a9940",
                 "shasum": ""
             },
             "require": {
@@ -1220,7 +1305,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:54:35"
+            "time": "2016-03-29 19:00:15"
         }
     ],
     "aliases": [],
