@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+	bootstrap="tests/WP_System/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+>
+	<php>
+		<!--
+			make a local copy of this file and name it "phpunit-wp-system.xml"
+			write in your DB credentials in your local copy, it's ignored by git
+			by default
+		-->
+		<const name="WP_AUTOLOAD_DB_USER" value="PLACEHOLDER" />
+		<const name="WP_AUTOLOAD_DB_NAME" value="PLACEHOLDER" />
+		<const name="WP_AUTOLOAD_DB_PASSWORD" value="PLACEHOLDER" />
+		<const name="WP_AUTOLOAD_DB_HOST" value="localhost" />
+		<const name="WP_AUTOLOAD_DB_CHARSET" value="utf8" />
+		<const name="WP_AUTOLOAD_DB_COLLATE" value="utf8_general_ci" />
+		<const name="WP_AUTOLOAD_DB_TABLE_PREFIX" value="wp_autoloader_" />
+	</php>
+	<testsuites>
+		<testsuite name="Wp system tests">
+			<directory suffix="Test.php">tests/WP_System</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

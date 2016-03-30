@@ -25,3 +25,11 @@ Composer will install everything in the directory `vendor/`. Now you can run the
 ```
 $ ./vendor/bin/phpunit 
 ```
+
+Run WP system tests: Copy the `phpunit-wp-system.xml.dist` file to `phpunit-wp-system.xml` (this is ignored by git by
+default). Insert your DB credentials (user, password, …) of your test database in the fields inside your local copy.
+Then run
+
+```
+$ ./vendor/bin/phpunit -c phpunit-wp-system.xml
+```
