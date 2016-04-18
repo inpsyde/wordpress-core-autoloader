@@ -1,46 +1,64 @@
 <?php # -*- coding: utf-8 -*-
 
+/**
+ * Core WordPress PSR-4 autoloader.
+ */
 class WP_Autoload_Psr4Rule implements WP_Autoload_Rule {
 
 	/**
 	 * @var string
 	 */
-	private $base_namespace;
-
-	/**
-	 * @var string
-	 */
-	private $base_directory;
+	private $directory;
 
 	/**
 	 * @var WP_Autoload_FileLoader
 	 */
 	private $file_loader;
-	
+
 	/**
-	 * @param $base_namespace
-	 * @param $base_directory
+	 * @var string
 	 */
-	public function __construct( $base_namespace, $base_directory, $file_loader = NULL ) {
-	
-		$this->base_directory = (string) $base_directory;
-		$this->base_namespace = (string) $base_namespace;
-		$this->file_loader    = $file_loader && is_a( $file_loader, 'WP_Autoload_Fileloader' )
-			? $file_loader
-			: new WP_Autoload_IsReadableFileLoader;
+	private $namespace;
+
+	/**
+	 * Constructor. Sets up the properties.
+	 *
+	 * @param string                 $namespace   The namespace.
+	 * @param string                 $directory   The directory root.
+	 * @param WP_Autoload_FileLoader $file_loader The core WordPress autoload file loader object.
+	 */
+	public function __construct( $namespace, $directory, WP_Autoload_FileLoader $file_loader ) {
+
+		$this->namespace = trim( (string) $namespace, '\\' );
+		// append trailing ns separator to avoid matches of NS:Foo\Bar with FQN:Foo\BarBazz
+		$this->namespace .= '\\';
+
+		$this->directory = preg_replace( '~[\\|/]+~', DIRECTORY_SEPARATOR, (string) $directory );
+		$this->directory = rtrim( $this->directory, DIRECTORY_SEPARATOR );
+
+		$this->file_loader = $file_loader;
 	}
 
 	/**
-	 * @param string $class (A full qualified class name)
+	 * Loads the according file for the given fully qualified name of a class, interface or trait.
+	 *
+	 * @param string $fqn The fully qualified name of a class, interface or trait.
 	 *
 	 * @return bool
 	 */
-	public function load_class( $class ) {
-		
-		// performing the psr4 mapping here to get a $file
-		$file = '/whatever';
-		
+	public function load( $fqn ) {
+
+		$fqn = ltrim( $fqn, '\\' );
+		if ( 0 !== strpos( $fqn, $this->namespace ) ) {
+			return false;
+		}
+
+		$namepart = str_replace( $this->namespace, '', $fqn );
+		$namepart = ltrim( $namepart, '\\' );
+
+		$file = $this->directory . DIRECTORY_SEPARATOR . "$namepart.php";
+		$file = str_replace( '\\', DIRECTORY_SEPARATOR, $file );
+
 		return $this->file_loader->load_file( $file );
 	}
-
 }

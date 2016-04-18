@@ -1,11 +1,16 @@
 <?php # -*- coding: utf-8 -*-
 
+/**
+ * Interface for all core WordPress-compatible autoload rule implementations.
+ */
 interface WP_Autoload_Rule {
 
 	/**
-	 * @param string $class (A full qualified class name)
+	 * Loads the according file for the given fully qualified name of a class, interface or trait.
+	 *
+	 * @param string $fqn The fully qualified name of a class, interface or trait.
 	 *
 	 * @return bool
 	 */
-	public function load_class( $class );
+	public function load( $fqn );
 }
