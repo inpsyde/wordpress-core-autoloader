@@ -29,12 +29,10 @@ class WP_Autoload_Psr4Rule implements WP_Autoload_Rule {
 	 */
 	public function __construct( $namespace, $directory, WP_Autoload_FileLoader $file_loader ) {
 
-		$this->namespace = trim( (string) $namespace, '\\' );
-		// append trailing ns separator to avoid matches of NS:Foo\Bar with FQN:Foo\BarBazz
-		$this->namespace .= '\\';
+		$this->namespace = trim( (string) $namespace, '\\' ) . '\\';
 
-		$this->directory = preg_replace( '~[\\|/]+~', DIRECTORY_SEPARATOR, (string) $directory );
-		$this->directory = rtrim( $this->directory, DIRECTORY_SEPARATOR );
+		$this->directory = str_replace( '\\', '/', (string) $directory );
+		$this->directory = trim( $this->directory, '/' ) . '/';
 
 		$this->file_loader = $file_loader;
 	}
@@ -53,12 +51,9 @@ class WP_Autoload_Psr4Rule implements WP_Autoload_Rule {
 			return false;
 		}
 
-		$namepart = str_replace( $this->namespace, '', $fqn );
-		$namepart = ltrim( $namepart, '\\' );
+		$file_path = substr( $fqn, strlen( $this->namespace ) );
+		$file_path = str_replace( '\\', '/', $file_path );
 
-		$file = $this->directory . DIRECTORY_SEPARATOR . "$namepart.php";
-		$file = str_replace( '\\', DIRECTORY_SEPARATOR, $file );
-
-		return $this->file_loader->load_file( $file );
+		return $this->file_loader->load_file( "{$this->directory}$file_path.php" );
 	}
 }
